@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, Typography, TextField, Button, Paper } from "@mui/material";
+import { createMovieList } from "../services/Auth";
 
 const CreateMovies = () => {
   const [title, setTitle] = useState("");
@@ -39,11 +40,30 @@ const CreateMovies = () => {
     return isValid;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!validate()) return;
-    console.log("Title:", title);
-    console.log("Year:", year);
-    console.log("Image:", image);
+
+    try {
+      // Create a FormData object
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("year", year);
+      formData.append("updatedBy", 12345);
+      formData.append("image", image);
+
+      const response = await createMovieList(formData);
+      if (response.data.code == "200") {
+        alert("Movie Added Successfully !!");
+        // window.location.reload();
+      } else {
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.log("Error", error);
+      alert(
+        "Internal Server Issue. or Please refresh and try Again with diffrent Enteries !!"
+      );
+    }
   };
 
   const handleReset = () => {

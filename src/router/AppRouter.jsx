@@ -17,7 +17,6 @@ const AppRouter = () => {
   return (
     <Router>
       <Routes>
-        {/* Public Route (no navbar) */}
         <Route
           path="/login"
           element={
@@ -27,11 +26,10 @@ const AppRouter = () => {
           }
         />
 
-        {/* Private Routes (with Navbar) */}
         <Route
           element={
             <PrivateRoute>
-              <Layout /> {/* Navbar + outlet */}
+              <Layout />
             </PrivateRoute>
           }
         >
@@ -40,7 +38,6 @@ const AppRouter = () => {
           <Route path="/viewMovies" element={<ViewMovies />} />
         </Route>
 
-        {/* Fallback */}
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </Router>

@@ -1,7 +1,7 @@
 import axios from "axios";
 // Base API URL
-const base_url = "https://rooftop-uat.mpcz.in:8888/RCDC/api/movie";
-const userId = sessionStorage.getItem("userId");
+// const base_url = "https://rooftop-uat.mpcz.in:8888/RCDC/api/movie";
+const base_url = "https://resources.mpcz.in:8888/RCDC/api/movie";
 
 // 1. User Login API
 export const userLogin = (payload) => {
@@ -23,5 +23,10 @@ export const updateMovieList = (payload) => {
 
 // 4. Get Movies List
 export const getMovieList = () => {
-  return axios.get(`${base_url}/getMyMoviesList?userId=${userId}`);
+  return axios.get(`${base_url}/getMyMoviesList?userId=12345`);
+};
+
+// Delete Movie
+export const deleteMovie = (id) => {
+  return axios.get(`${base_url}/removeMovieById?id=${id}`);
 };

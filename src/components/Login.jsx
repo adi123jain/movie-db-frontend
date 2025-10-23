@@ -53,7 +53,6 @@ const Login = () => {
         valid = false;
       }
     }
-
     if (!valid) return;
 
     try {
@@ -65,7 +64,7 @@ const Login = () => {
       };
 
       const response = await userLogin(payload);
-      console.log(response);
+
       if (response.data.code == "200") {
         const token = response.headers.authorization;
         const userName = response.data.list[0].fullName;
@@ -78,11 +77,6 @@ const Login = () => {
     } catch (error) {
       console.log("error", error);
     }
-
-    // If valid, log values
-    console.log("UserID:", userId);
-    console.log("Password:", password);
-    console.log("Remember Me:", remember);
   };
 
   return (

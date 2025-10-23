@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Typography, TextField, Button, Paper } from "@mui/material";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { updateMovieList } from "../services/Auth";
 
 const UpdateMovies = () => {
   const [title, setTitle] = useState("");
@@ -7,6 +9,15 @@ const UpdateMovies = () => {
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
   const [errors, setErrors] = useState({ title: "", year: "", image: "" });
+  const [searchParams] = useSearchParams();
+  const movieId = searchParams.get("id");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!movieId) {
+      navigate("/viewMovies");
+    }
+  }, []);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -39,11 +50,27 @@ const UpdateMovies = () => {
     return isValid;
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = async () => {
     if (!validate()) return;
-    console.log("Updated Title:", title);
-    console.log("Updated Year:", year);
-    console.log("Updated Image:", image);
+
+    try {
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("year", year);
+      formData.append("updatedBy", 12345);
+      formData.append("image", image);
+      formData.append("id", movieId);
+
+      const response = await updateMovieList(formData);
+      if (response.data.code == "200") {
+        alert("Movie Updated Successfully !!");
+        navigate("/viewMovies");
+      } else {
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.log("Error", error);
+    }
   };
 
   const handleCancel = () => {
@@ -61,7 +88,6 @@ const UpdateMovies = () => {
       </Typography>
 
       <Box className="edit-movie-box">
-        {/* Image Upload */}
         <Box className="edit-image-section">
           <Paper
             elevation={0}

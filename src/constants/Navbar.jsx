@@ -11,36 +11,34 @@ import {
   Avatar,
   Button,
   Chip,
-  Badge,
   Fab,
   Tooltip,
 } from "@mui/material";
-import AddBoxIcon from "@mui/icons-material/AddBox";
-import TheatersIcon from "@mui/icons-material/Theaters";
-
 import MenuIcon from "@mui/icons-material/Menu";
-import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
-import MovieIcon from "@mui/icons-material/Movie";
+import MovieFilterIcon from "@mui/icons-material/MovieFilter";
+import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+import SlideshowRoundedIcon from "@mui/icons-material/SlideshowRounded";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import DashboardCustomizeRoundedIcon from "@mui/icons-material/DashboardCustomizeRounded";
 
 import { Link, useNavigate } from "react-router-dom";
-import HomeIcon from "@mui/icons-material/Home";
-import DashboardIcon from "@mui/icons-material/Dashboard";
 
-const settings = ["Profile", "Logout"];
+const settings = ["Logout"];
 
 function Navbar({ children }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
 
-  const fullName = sessionStorage.getItem("userName") || "User";
+  const fullName = localStorage.getItem("userName") || "User";
 
-  // Generate initials (e.g., "Test User" → "TU")
   const getInitials = (name) => {
     if (!name) return "";
     const parts = name.trim().split(" ");
-    if (parts.length === 1) return parts[0][0].toUpperCase();
-    return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
+    return parts.length === 1
+      ? parts[0][0].toUpperCase()
+      : `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
   };
 
   const initials = getInitials(fullName);
@@ -53,8 +51,8 @@ function Navbar({ children }) {
   const handleUserMenuClick = (setting) => {
     if (setting === "Logout") {
       localStorage.clear();
-      window.location.reload();
       navigate("/login");
+      window.location.reload();
     }
     handleCloseUserMenu();
   };
@@ -64,23 +62,25 @@ function Navbar({ children }) {
       <AppBar
         position="static"
         sx={{
-          background: "linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%)",
-          boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-          //   padding: "10px",
+          background: "linear-gradient(135deg, #f8f9fa 0%, #e0e0e0 100%)",
+          boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
         }}
       >
         <Container maxWidth="xl">
           <Toolbar
             disableGutters
             sx={{
-              color: "#424242",
+              color: "#333",
               fontWeight: "bold",
-              textShadow: "1px 1px 3px rgba(0,0,0,0.2)",
             }}
           >
-            <MovieIcon
+            <MovieFilterIcon
               fontSize="medium"
-              sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+              sx={{
+                display: { xs: "none", md: "flex" },
+                mr: 1,
+                color: "#5c6bc0",
+              }}
             />
             <Typography
               variant="h6"
@@ -89,18 +89,16 @@ function Navbar({ children }) {
               sx={{
                 mr: 2,
                 display: "flex",
-                fontFamily: "monospace",
+                fontFamily: "Poppins, sans-serif",
                 fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "#424242",
+                letterSpacing: ".2rem",
+                color: "#333",
                 textDecoration: "none",
-                textShadow: "2px 2px 4px #000000",
               }}
             >
-              Movies
+              Movie DB
             </Typography>
 
-            {/* Mobile menu */}
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -114,20 +112,46 @@ function Navbar({ children }) {
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
               >
-                <MenuItem onClick={() => navigate("/")}>Home</MenuItem>
+                <MenuItem onClick={() => navigate("/")}>
+                  <HomeRoundedIcon sx={{ mr: 1 }} /> Home
+                </MenuItem>
+                <MenuItem onClick={() => navigate("/createMovies")}>
+                  <AddCircleRoundedIcon sx={{ mr: 1 }} /> Create
+                </MenuItem>
+                <MenuItem onClick={() => navigate("/viewMovies")}>
+                  <SlideshowRoundedIcon sx={{ mr: 1 }} /> View
+                </MenuItem>
               </Menu>
             </Box>
 
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              <Tooltip title="Create Movies" arrow placement="top">
-                <Button color="primary" component={Link} to="/createMovies">
-                  <AddBoxIcon fontSize="medium" />
+              <Tooltip title="Create Movie" arrow placement="top">
+                <Button
+                  color="inherit"
+                  component={Link}
+                  to="/createMovies"
+                  sx={{
+                    color: "#5c6bc0",
+                    "&:hover": { color: "#3949ab", transform: "scale(1.05)" },
+                    transition: "0.3s",
+                  }}
+                >
+                  <AddCircleRoundedIcon fontSize="medium" />
                 </Button>
               </Tooltip>
 
-              <Tooltip title="View Movies" arrow placement="top">
-                <Button color="primary" component={Link} to="/viewMovies">
-                  <TheatersIcon fontSize="medium" />
+              <Tooltip title="View All Movies" arrow placement="top">
+                <Button
+                  color="inherit"
+                  component={Link}
+                  to="/viewMovies"
+                  sx={{
+                    color: "#26a69a",
+                    "&:hover": { color: "#00897b", transform: "scale(1.05)" },
+                    transition: "0.3s",
+                  }}
+                >
+                  <SlideshowRoundedIcon fontSize="medium" />
                 </Button>
               </Tooltip>
             </Box>
@@ -136,11 +160,7 @@ function Navbar({ children }) {
               label={fullName}
               avatar={
                 <Avatar
-                  sx={{
-                    //bgcolor: "#673ab7",
-                    color: "white",
-                    fontWeight: "bold",
-                  }}
+                  sx={{ bgcolor: "#5c6bc0", color: "#fff", fontWeight: "bold" }}
                 >
                   {initials}
                 </Avatar>
@@ -148,10 +168,11 @@ function Navbar({ children }) {
               onClick={handleOpenUserMenu}
               sx={{
                 backgroundColor: "#ede7f6",
-                color: "#4527a0",
+                color: "#333",
                 fontWeight: "bold",
                 border: "1px solid #b39ddb",
-                "& .MuiChip-label": { fontWeight: "600" },
+                cursor: "pointer",
+                "&:hover": { boxShadow: "0 0 8px rgba(92,107,192,0.5)" },
               }}
             />
 
@@ -161,7 +182,7 @@ function Navbar({ children }) {
               onClose={handleCloseUserMenu}
             >
               <MenuItem onClick={() => handleUserMenuClick("Logout")}>
-                Logout
+                <LogoutRoundedIcon sx={{ mr: 1, color: "#d32f2f" }} /> Logout
               </MenuItem>
             </Menu>
           </Toolbar>
@@ -170,24 +191,28 @@ function Navbar({ children }) {
 
       <Box component="main" sx={{ flexGrow: 1 }}>
         {children}
-        <Tooltip title="Click here" arrow placement="top">
+
+        <Tooltip title="Dashboard" arrow placement="top">
           <Fab
-            color="secondary"
+            color="primary"
             aria-label="dashboard"
             onClick={() => navigate("/")}
             sx={{
               position: "fixed",
               bottom: 60,
-              right: 10,
-              animation: "bounce 2s infinite",
-              "@keyframes bounce": {
-                "0%, 20%, 50%, 80%, 100%": { transform: "translateY(0)" },
-                "40%": { transform: "translateY(-10px)" },
-                "60%": { transform: "translateY(-5px)" },
+              right: 20,
+              background: "linear-gradient(135deg, #3949ab 0%, #5c6bc0 100%)",
+              boxShadow: "0 6px 15px rgba(0,0,0,0.2)",
+              "&:hover": { transform: "scale(1.1)" },
+              transition: "0.3s",
+              animation: "float 2s infinite ease-in-out",
+              "@keyframes float": {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-8px)" },
               },
             }}
           >
-            <DashboardIcon />
+            <DashboardCustomizeRoundedIcon />
           </Fab>
         </Tooltip>
 
@@ -199,12 +224,15 @@ function Navbar({ children }) {
             width: "100%",
             padding: "15px",
             textAlign: "center",
-            fontFamily: "sans-serif",
-            background: "linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%)",
-            boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+            fontFamily: "Poppins, sans-serif",
+            background: "linear-gradient(135deg, #f8f9fa 0%, #e0e0e0 100%)",
+            boxShadow: "0 -2px 10px rgba(0,0,0,0.1)",
+            color: "#555",
+            fontSize: "0.9rem",
+            fontWeight: 500,
           }}
         >
-          © 2025, All Rights Reserved By Bollywood.
+          © 2025 Movie DB. All Rights Reserved.
         </Box>
       </Box>
     </>
