@@ -54,7 +54,7 @@ const CreateMovies = () => {
       const response = await createMovieList(formData);
       if (response.data.code == "200") {
         alert("Movie Added Successfully !!");
-        // window.location.reload();
+        window.location.reload();
       } else {
         alert(response.data.message);
       }
@@ -110,7 +110,6 @@ const CreateMovies = () => {
           )}
         </Box>
 
-        {/* Form Section */}
         <Box className="form-section">
           <Box>
             <TextField

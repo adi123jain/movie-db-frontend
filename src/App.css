@@ -10,7 +10,6 @@ html, body {
   height: 100%;
 }
 
-/* ===== Gradient Background ===== */
 .login-page {
   height: 100vh;
   width: 100%;
@@ -21,7 +20,6 @@ html, body {
   padding: 1rem;
 }
 
-/* ===== Center Card ===== */
 .login-card {
   width: 100%;
   max-width: 380px;
@@ -33,7 +31,6 @@ html, body {
   color: #ffffff;
 }
 
-/* ===== Title ===== */
 .login-title {
   color: #ffffff;
   font-weight: 600;
@@ -42,31 +39,8 @@ html, body {
 }
 
 
-/* .empty-card {
-  width: 100%;
-  max-width: 380px;
-  background-color: #013b4a!important;
-  border-radius: 16px;
-  padding: 2.5rem 2rem;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  color: #ffffff;
-}
-
-.empty-title {
-  color: #ffffff;
-  font-weight: 300;
-  margin-bottom: 1.8rem;
-  letter-spacing: 0.5px;
-} */
-
-/* .empty-btn {
-  background-color: #00e676 !important;
-  color: #ffffff !important;
  
-} */
 
-/* ===== Input Fields ===== */
 .login-form {
   display: flex;
   flex-direction: column;
@@ -96,18 +70,15 @@ html, body {
   color: #00e676;
 }
 
-/* ===== Icons ===== */
 .login-icon {
   color: #a7b1b7;
 }
 
-/* ===== Remember me ===== */
 .remember-label {
   color: #a7b1b7;
   font-size: 0.9rem;
 }
 
-/* ===== Login Button ===== */
 .login-btn {
   background-color: #00e676 !important;
   color: #ffffff !important;
@@ -131,7 +102,6 @@ html, body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  /* padding: 40px !important; */
 }
 
 .create-movie-title {
@@ -152,7 +122,6 @@ html, body {
   max-width: 900px !important;
 }
 
-/* Image upload section */
 .image-upload-section {
   text-align: center !important;
 }
@@ -186,7 +155,6 @@ html, body {
   color: #a7c6cc !important;
 }
 
-/* Form section */
 .form-section {
   display: flex !important;
   flex-direction: column !important;
@@ -220,7 +188,6 @@ html, body {
   margin-top: 20px !important;
 }
 
-/* Buttons */
 .cancel-btn {
   border-color: #ffffff !important;
   color: #ffffff !important;
@@ -254,7 +221,6 @@ html, body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  /* padding: 40px !important; */
 }
 
 .edit-movie-title {
@@ -275,7 +241,6 @@ html, body {
   max-width: 900px !important;
 }
 
-/* Image Section */
 .edit-image-section {
   text-align: center !important;
 }
@@ -309,7 +274,6 @@ html, body {
   color: #a7c6cc !important;
 }
 
-/* Form Section */
 .edit-form-section {
   display: flex !important;
   flex-direction: column !important;
@@ -343,7 +307,6 @@ html, body {
   margin-top: 20px !important;
 }
 
-/* Buttons */
 .edit-cancel-btn {
   border-color: #ffffff !important;
   color: #ffffff !important;
@@ -378,7 +341,6 @@ html, body {
 }
 
 
-/* ===== Responsive Adjustments ===== */
 @media (max-width: 480px) {
   .login-card {
     padding: 1.5rem;
